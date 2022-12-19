@@ -11,4 +11,3 @@ export const publicRoutes = [
     element: <AuthRoutes />
   }
 ];
-// Routes from auth -> Login, Register, ... for Guest
