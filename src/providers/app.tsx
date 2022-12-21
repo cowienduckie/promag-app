@@ -1,8 +1,9 @@
 import * as React from "react";
-import { ChakraProvider } from "@chakra-ui/react";
 import { Loading } from "@/components/screens";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "@/lib/auth";
+import { ConfigProvider } from "antd";
+import { themeConfig } from "@/config";
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -10,12 +11,12 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <React.Suspense fallback={<Loading />}>
-      <AuthProvider>
-        <ChakraProvider>
+    <ConfigProvider theme={themeConfig}>
+      <React.Suspense fallback={<Loading />}>
+        <AuthProvider>
           <BrowserRouter>{children}</BrowserRouter>
-        </ChakraProvider>
-      </AuthProvider>
-    </React.Suspense>
+        </AuthProvider>
+      </React.Suspense>
+    </ConfigProvider>
   );
 };
