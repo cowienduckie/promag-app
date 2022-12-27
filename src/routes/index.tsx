@@ -1,4 +1,3 @@
-import { useRoutes } from "react-router-dom";
 import { Landing } from "@/features/misc";
 import { protectedRoutes } from "./protectedRoutes";
 import { publicRoutes } from "./publicRoutes";
@@ -17,7 +16,5 @@ export const AppRoutes = () => {
 
   const routes = true ? protectedRoutes : publicRoutes;
 
-  const elements = useRoutes([...routes, ...commonRoutes]);
-
-  return <>{elements}</>;
+  return [...routes, ...commonRoutes];
 };

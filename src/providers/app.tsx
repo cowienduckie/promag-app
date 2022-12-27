@@ -1,20 +1,23 @@
 import * as React from "react";
 import { Loading } from "@/components/screens";
-import { BrowserRouter } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
+} from "react-router-dom";
 import { AuthProvider } from "@/lib/auth";
 import { ConfigProvider } from "antd";
 import { themeConfig } from "@/config";
+import { AppRoutes } from "@/routes";
 
-type AppProviderProps = {
-  children: React.ReactNode;
-};
+const router = createBrowserRouter(AppRoutes());
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const AppProvider = () => {
   return (
     <ConfigProvider theme={themeConfig}>
       <React.Suspense fallback={<Loading />}>
         <AuthProvider>
-          <BrowserRouter>{children}</BrowserRouter>
+          <RouterProvider router={router} />
         </AuthProvider>
       </React.Suspense>
     </ConfigProvider>

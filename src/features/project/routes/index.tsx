@@ -1,10 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { ProjectView } from "./ProjectView";
+import { ProjectDetailPage } from "./ProjectDetailPage";
+import { ProjectListPage } from "./ProjectListPage";
 
 export const ProjectRoutes = () => {
   return (
     <Routes>
-      <Route path="list" element={<ProjectView />} />
+      <Route path="list" element={<ProjectListPage />} />
+      <Route path="detail/:projectId" element={<ProjectDetailPage />} />
     </Routes>
   );
 };
