@@ -2,6 +2,7 @@ import { ITask } from "@/features/project/types";
 import { Container } from "@/features/project/components/container";
 import { Draggable } from "react-beautiful-dnd";
 import { memo } from "react";
+import { Checkbox } from "antd";
 
 type TaskProps = {
   task: ITask;
@@ -20,14 +21,19 @@ const Task = (props: TaskProps) => {
     >
       {(provided, snapshot) => (
         <Container
-          className={`my-2 w-full rounded p-4 ${
+          className={`my-2 rounded p-4 ${
             snapshot.isDragging ? "bg-green-100" : "bg-white"
           }`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           innerRef={provided.innerRef}
         >
-          {task.content}
+          <p>
+            <strong>{task.content}</strong>
+          </p>
+          <Checkbox className="mt-5" checked={task.isCompleted}>
+            Is Completed?
+          </Checkbox>
         </Container>
       )}
     </Draggable>

@@ -4,10 +4,26 @@
       "id": "project-1",
       "name": "ProMag",
       "tasks": {
-        "task-1": { "id": "task-1", "content": "Create a new task" },
-        "task-2": { "id": "task-2", "content": "Assign task" },
-        "task-3": { "id": "task-3", "content": "Review code" },
-        "task-4": { "id": "task-4", "content": "Planning" }
+        "task-1": {
+          "id": "task-1",
+          "content": "Create a new task",
+          "isCompleted": false
+        },
+        "task-2": {
+          "id": "task-2",
+          "content": "Assign task",
+          "isCompleted": false
+        },
+        "task-3": {
+          "id": "task-3",
+          "content": "Review code",
+          "isCompleted": false
+        },
+        "task-4": {
+          "id": "task-4",
+          "content": "Planning",
+          "isCompleted": false
+        }
       },
       "columns": {
         "column-1": {
@@ -32,8 +48,16 @@
       "id": "project-2",
       "name": "ClothingShop",
       "tasks": {
-        "task-1": { "id": "task-1", "content": "Create a new task" },
-        "task-2": { "id": "task-2", "content": "Assign task" }
+        "task-1": {
+          "id": "task-1",
+          "content": "Create a new task",
+          "isCompleted": false
+        },
+        "task-2": {
+          "id": "task-2",
+          "content": "Assign task",
+          "isCompleted": false
+        }
       },
       "columns": {
         "column-1": {

@@ -27,6 +27,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+        <h1 className="my-5 text-center text-2xl font-bold text-white">
+          {!collapsed ? "PROMAG" : "PM"}
+        </h1>
         <Menu
           theme="dark"
           className="bg-inherit pt-5"
@@ -35,7 +38,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           items={menuItems}
         />
       </Sider>
-      <Layout className="site-layout bg-inherit">
+      <Layout className="bg-inherit">
         <Content
           className="border-1 m-5 rounded shadow-md"
           style={{ background: colorBgContainer }}
