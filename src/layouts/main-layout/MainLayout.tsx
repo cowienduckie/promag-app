@@ -3,7 +3,7 @@ import { Layout, Menu, theme } from "antd";
 import { useMenuData } from "./data";
 import { useLocation } from "react-router-dom";
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
     "/" + location.pathname.split("/").slice(1, 3).join("/");
 
   return (
-    <Layout className="min-h-screen">
+    <Layout className="min-h-screen bg-blue-100">
       <Sider
         collapsible
         collapsed={collapsed}
@@ -29,15 +29,17 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       >
         <Menu
           theme="dark"
-          className="pt-5"
+          className="bg-inherit pt-5"
           mode="inline"
           selectedKeys={Array<string>(activeMenuItem)}
           items={menuItems}
         />
       </Sider>
-      <Layout className="site-layout">
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content className="m-5" style={{ background: colorBgContainer }}>
+      <Layout className="site-layout bg-inherit">
+        <Content
+          className="border-1 m-5 rounded shadow-md"
+          style={{ background: colorBgContainer }}
+        >
           {children}
         </Content>
       </Layout>

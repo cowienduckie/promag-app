@@ -4,10 +4,10 @@ import { Column } from "@/features/project/components/column";
 import { Container } from "@/features/project/components/container";
 import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppable";
 import { useLoaderData } from "react-router-dom";
-import { IProject } from "@/features/project/types";
+import { LoaderData } from "../interface";
 
 export const ProjectDetailPage = () => {
-  const { project } = useLoaderData() as { project: IProject };
+  const { project } = useLoaderData() as LoaderData;
 
   const [state, setState] = useState(project);
 

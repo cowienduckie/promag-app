@@ -22,7 +22,7 @@ export const useMenuData = () => {
   const menuItems: MenuItem[] = [
     getItem(<Link to="/app">Dashboard</Link>, "/app", <PieChartOutlined />),
     getItem(
-      <Link to="/app/projects/list">Projects</Link>,
+      <Link to="/app/projects">Projects</Link>,
       "/app/projects",
       <DesktopOutlined />
     )

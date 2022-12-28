@@ -2,6 +2,7 @@
   "projects": [
     {
       "id": "project-1",
+      "name": "ProMag",
       "tasks": {
         "task-1": { "id": "task-1", "content": "Create a new task" },
         "task-2": { "id": "task-2", "content": "Assign task" },
@@ -29,6 +30,7 @@
     },
     {
       "id": "project-2",
+      "name": "ClothingShop",
       "tasks": {
         "task-1": { "id": "task-1", "content": "Create a new task" },
         "task-2": { "id": "task-2", "content": "Assign task" }

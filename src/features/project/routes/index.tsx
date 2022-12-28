@@ -1,13 +1,13 @@
-import { ProjectDetailLoader } from "../pages/detail/data";
-import { ProjectDetailPage } from "../pages/detail";
-import { ProjectListPage } from "../pages/list/ProjectListPage";
+import { ProjectDetailPage, ProjectDetailLoader } from "../pages/detail";
+import { ProjectListPage, ProjectListLoader } from "../pages/list";
 
 export const ProjectRoutes = {
-  path: "projects/*",
+  path: "projects",
   children: [
     {
-      path: "list",
-      element: <ProjectListPage />
+      index: true,
+      element: <ProjectListPage />,
+      loader: ProjectListLoader
     },
     {
       path: "detail/:projectId",
