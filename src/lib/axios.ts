@@ -1,6 +1,6 @@
 import Axios, { AxiosRequestConfig } from "axios";
 
-import { API_URL } from "@/config";
+import { BASE_API_URL } from "@/config";
 import storage from "@/utils/storage";
 
 function authRequestInterceptor(config: AxiosRequestConfig) {
@@ -17,7 +17,7 @@ function authRequestInterceptor(config: AxiosRequestConfig) {
 }
 
 export const axios = Axios.create({
-  baseURL: API_URL
+  baseURL: BASE_API_URL
 });
 
 axios.interceptors.request.use(authRequestInterceptor);

@@ -16,3 +16,10 @@ export interface ColumnType {
 export interface ColumnListType {
   [key: string]: ColumnType;
 }
+
+export interface ProjectType {
+  id: string;
+  tasks: TaskListType;
+  column: ColumnListType;
+  columnOrder: string[];
+}

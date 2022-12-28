@@ -1,1 +1,1 @@
-export * from "./useLoaderData";
+export { loader as ProjectDetailLoader } from "./loader";
