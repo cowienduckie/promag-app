@@ -1,6 +1,6 @@
 {
-  "projects": {
-    "project-1": {
+  "projects": [
+    {
       "id": "project-1",
       "tasks": {
         "task-1": { "id": "task-1", "content": "Create a new task" },
@@ -27,7 +27,7 @@
       },
       "columnOrder": ["column-1", "column-2", "column-3"]
     },
-    "project-2": {
+    {
       "id": "project-2",
       "tasks": {
         "task-1": { "id": "task-1", "content": "Create a new task" },
@@ -52,5 +52,5 @@
       },
       "columnOrder": ["column-1", "column-2", "column-3"]
     }
-  }
+  ]
 }

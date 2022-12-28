@@ -19,7 +19,7 @@
   "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "react/display-name": 1,
+    "react/display-name": 0,
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
   }
 }

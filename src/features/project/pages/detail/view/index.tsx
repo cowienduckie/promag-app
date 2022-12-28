@@ -3,16 +3,13 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { Column } from "@/features/project/components/column";
 import { Container } from "@/features/project/components/container";
 import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppable";
-import initialData from "@/features/project/initial-data";
 import { useLoaderData } from "react-router-dom";
 import { ProjectType } from "@/features/project/types";
 
-export const ProjectDetailView = () => {
-  const data = useLoaderData() as { project: ProjectType };
+export const ProjectDetailPage = () => {
+  const { project } = useLoaderData() as { project: ProjectType };
 
-  console.log(data);
-
-  const [state, setState] = useState(initialData);
+  const [state, setState] = useState(project);
 
   const onDragEnd = (result: DropResult): void => {
     const { draggableId, source, destination, type } = result;

@@ -20,6 +20,6 @@ export interface ColumnListType {
 export interface ProjectType {
   id: string;
   tasks: TaskListType;
-  column: ColumnListType;
+  columns: ColumnListType;
   columnOrder: string[];
 }

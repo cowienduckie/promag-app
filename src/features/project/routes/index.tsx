@@ -1,17 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import { ProjectDetailLoader } from "../containers/project-detail";
-import { ProjectDetailPage } from "./ProjectDetailPage";
-import { ProjectListPage } from "./ProjectListPage";
+import { ProjectDetailLoader } from "../pages/detail/data";
+import { ProjectDetailPage } from "../pages/detail";
+import { ProjectListPage } from "../pages/list/ProjectListPage";
 
-export const ProjectRoutes = () => {
-  return (
-    <Routes>
-      <Route path="list" element={<ProjectListPage />} />
-      <Route
-        path="detail/:projectId"
-        element={<ProjectDetailPage />}
-        loader={ProjectDetailLoader}
-      />
-    </Routes>
-  );
+export const ProjectRoutes = {
+  path: "projects/*",
+  children: [
+    {
+      path: "list",
+      element: <ProjectListPage />
+    },
+    {
+      path: "detail/:projectId",
+      element: <ProjectDetailPage />,
+      loader: ProjectDetailLoader
+    }
+  ]
 };
