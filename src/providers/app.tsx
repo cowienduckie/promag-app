@@ -1,25 +1,20 @@
 import * as React from "react";
 import { Loading } from "@/components/screens";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AuthProvider } from "@/lib/auth";
-import { ConfigProvider } from "antd";
-import { themeConfig } from "@/config";
 import { AppRoutes } from "@/routes";
+import { StyleProvider } from "@ant-design/cssinjs";
 
 const router = createBrowserRouter(AppRoutes());
 
 export const AppProvider = () => {
   return (
-    <ConfigProvider theme={themeConfig}>
-      <React.Suspense fallback={<Loading />}>
+    <React.Suspense fallback={<Loading />}>
+      <StyleProvider hashPriority="high">
         <AuthProvider>
           <RouterProvider router={router} />
         </AuthProvider>
-      </React.Suspense>
-    </ConfigProvider>
+      </StyleProvider>
+    </React.Suspense>
   );
 };
