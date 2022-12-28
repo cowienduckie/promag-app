@@ -3,10 +3,6 @@ import { protectedRoutes } from "./protectedRoutes";
 import { publicRoutes } from "./publicRoutes";
 
 export const AppRoutes = () => {
-  const auth = {
-    user: null
-  };
-
   const commonRoutes = [
     {
       path: "/",

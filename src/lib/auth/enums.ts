@@ -1,9 +1,9 @@
 export const enum Role {
-  Admin,
-  User
+  Admin = "AdminRole",
+  User = "UserRole"
 }
 
 export const enum AuthAction {
-  SetAuth,
-  ClearAuth
+  SetAuth = "SetAuthAction",
+  ClearAuth = "ClearAuthAction"
 }
