@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Menu, theme } from "antd";
 import { useMenuData } from "./data";
+import { useLocation } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
@@ -15,6 +16,9 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   } = theme.useToken();
 
   const { menuItems } = useMenuData();
+  const location = useLocation();
+  const activeMenuItem =
+    "/" + location.pathname.split("/").slice(1, 3).join("/");
 
   return (
     <Layout className="min-h-screen">
@@ -26,8 +30,8 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         <Menu
           theme="dark"
           className="pt-5"
-          defaultSelectedKeys={["1"]}
           mode="inline"
+          selectedKeys={Array<string>(activeMenuItem)}
           items={menuItems}
         />
       </Sider>
