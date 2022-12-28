@@ -8,3 +8,7 @@ export const getProjectById = (projectId: string): Promise<IProject> => {
 export const getProjects = (): Promise<IProject[]> => {
   return axios(`/projects`);
 };
+
+export const updateProject = (projectId: string, project: IProject) => {
+  return axios.patch(`/projects/${projectId}`, project);
+};

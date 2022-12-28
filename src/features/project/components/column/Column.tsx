@@ -5,6 +5,7 @@ import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppab
 import { IColumn, ITask } from "@/features/project/types";
 import { memo } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { AddTaskModal } from "../add-task-modal";
 
 type ColumnProps = {
   column: IColumn;
@@ -47,6 +48,7 @@ const Column = (props: ColumnProps) => {
               </TaskList>
             )}
           </StrictModeDroppable>
+          <AddTaskModal column={column} />
         </Container>
       )}
     </Draggable>
