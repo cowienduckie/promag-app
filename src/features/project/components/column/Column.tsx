@@ -2,17 +2,17 @@ import { Container } from "@/features/project/components/container";
 import { Task } from "@/features/project/components/task";
 import { TaskList } from "@/features/project/components/tasks-list";
 import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppable";
-import { ColumnType, TaskType } from "@/features/project/types";
+import { IColumn, ITask } from "@/features/project/types";
 import { memo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 
 type ColumnProps = {
-  column: ColumnType;
-  tasks: TaskType[];
+  column: IColumn;
+  tasks: ITask[];
   index: number;
 };
 
-const InnerTaskList = memo(({ tasks }: { tasks: TaskType[] }) => (
+const InnerTaskList = memo(({ tasks }: { tasks: ITask[] }) => (
   <>
     {tasks.map((task, index) => (
       <Task key={task.id} task={task} index={index} />

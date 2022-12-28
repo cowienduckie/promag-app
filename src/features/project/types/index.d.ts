@@ -1,25 +1,25 @@
-export interface TaskType {
+export interface ITask {
   id: string;
   content: string;
 }
 
-export interface TaskListType {
-  [key: string]: TaskType;
+export interface ITaskSet {
+  [key: string]: ITask;
 }
 
-export interface ColumnType {
+export interface IColumn {
   id: string;
   title: string;
   taskIds: string[];
 }
 
-export interface ColumnListType {
-  [key: string]: ColumnType;
+export interface IColumnSet {
+  [key: string]: IColumn;
 }
 
-export interface ProjectType {
+export interface IProject {
   id: string;
-  tasks: TaskListType;
-  columns: ColumnListType;
+  tasks: ITaskSet;
+  columns: IColumnSet;
   columnOrder: string[];
 }

@@ -1,10 +1,10 @@
-import { TaskType } from "@/features/project/types";
+import { ITask } from "@/features/project/types";
 import { Container } from "@/features/project/components/container";
 import { Draggable } from "react-beautiful-dnd";
 import { memo } from "react";
 
 type TaskProps = {
-  task: TaskType;
+  task: ITask;
   index: number;
 };
 

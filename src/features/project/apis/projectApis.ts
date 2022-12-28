@@ -1,6 +1,6 @@
 import { axios } from "@/lib/axios";
-import { ProjectType } from "../types";
+import { IProject } from "../types";
 
-export const getProjectById = (projectId: string): Promise<ProjectType> => {
+export const getProjectById = (projectId: string): Promise<IProject> => {
   return axios(`/projects/${projectId}`);
 };
