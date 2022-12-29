@@ -10,5 +10,5 @@ export const getProjects = (): Promise<IProject[]> => {
 };
 
 export const updateProject = (projectId: string, project: IProject) => {
-  return axios.patch(`/projects/${projectId}`, project);
+  return axios.put(`/projects/${projectId}`, project);
 };
