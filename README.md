@@ -8,3 +8,5 @@ Web application for ProMag project using ReactJS
 npm install
 npm run dev
 ```
+
+Built app will run on `localhost:3000`
