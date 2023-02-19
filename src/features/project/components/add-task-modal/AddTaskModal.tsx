@@ -1,7 +1,7 @@
 import { ButtonModal } from "@/components/button-modal";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { Button, Form, Input } from "antd";
-import { IColumn } from "../../types";
+import { IColumn } from "../../interfaces";
 
 export const AddTaskModal = ({ column }: { column: IColumn }) => {
   const { isOpen, open, close } = useDisclosure(false);

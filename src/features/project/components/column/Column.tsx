@@ -2,7 +2,7 @@ import { Container } from "@/features/project/components/container";
 import { Task } from "@/features/project/components/task";
 import { TaskList } from "@/features/project/components/tasks-list";
 import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppable";
-import { IColumn, ITask } from "@/features/project/types";
+import { IColumn, ITask } from "@/features/project/interfaces";
 import { memo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { AddTaskModal } from "../add-task-modal";

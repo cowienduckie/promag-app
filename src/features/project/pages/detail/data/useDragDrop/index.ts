@@ -1,5 +1,5 @@
 import { updateProject } from "@/features/project/apis";
-import { IColumn, IProject } from "@/features/project/types";
+import { IColumn, IProject } from "@/features/project/interfaces";
 import { useState } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import {

@@ -25,25 +25,3 @@ export interface IProject {
   columns: IColumnSet;
   columnOrder: string[];
 }
-
-export type WorkItem = {
-  id: string;
-  name: string;
-  description: string?;
-  isCompleted: boolean;
-  position: number;
-  workColumnId: string;
-};
-
-export type WorkColumn = {
-  id: string;
-  name: string;
-  position: number;
-  workItems: WorkItem[];
-};
-
-export type Project = {
-  id: string;
-  name: string;
-  description: string;
-};

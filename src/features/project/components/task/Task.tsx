@@ -1,4 +1,4 @@
-import { ITask } from "@/features/project/types";
+import { ITask } from "@/features/project/interfaces";
 import { Container } from "@/features/project/components/container";
 import { Draggable } from "react-beautiful-dnd";
 import { memo } from "react";

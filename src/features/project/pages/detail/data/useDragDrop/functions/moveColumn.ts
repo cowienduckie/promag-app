@@ -1,4 +1,4 @@
-import { IProject } from "@/features/project/types";
+import { IProject } from "@/features/project/interfaces";
 import { DraggableLocation } from "react-beautiful-dnd";
 
 export const moveColumn = (
