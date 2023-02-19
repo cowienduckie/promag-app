@@ -12,6 +12,8 @@ export const getProjectById = (projectId: string): Promise<IProject> => {
     (response) => {
       const project = response.data.data;
 
+      console.log(project);
+
       if (!!project) {
         return {
           id: project.id,

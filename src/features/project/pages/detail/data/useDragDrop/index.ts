@@ -16,6 +16,7 @@ type ReturnType = {
   onDragEnd: (result: DropResult) => void;
   onCompleteTask: (taskId: string, currentColumn: IColumn) => void;
   state: IProject;
+  setState: (project: IProject) => void;
 };
 
 export const useDragDrop = (props: Props): ReturnType => {
@@ -99,5 +100,5 @@ export const useDragDrop = (props: Props): ReturnType => {
     updateProject(newState.id, newState);
   };
 
-  return { onDragEnd, onCompleteTask, state };
+  return { onDragEnd, onCompleteTask, state, setState };
 };

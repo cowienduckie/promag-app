@@ -5,16 +5,29 @@ import { StrictModeDroppable } from "@/features/project/libs/strict-mode-droppab
 import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../interface";
 import { useDragDrop } from "../data";
+import { useEffect, useState } from "react";
 
 export const ProjectDetailPage = () => {
-  const { project } = useLoaderData() as LoaderData;
-  const { onDragEnd, state } = useDragDrop({ project });
+  const { promise, project } = useLoaderData() as LoaderData;
+  const { onDragEnd, state, setState } = useDragDrop({ project });
+  const [lastUpdated, setLastUpdated] = useState<string>("");
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const response = await promise;
+      setState(response);
+      setLastUpdated(new Date().toLocaleTimeString());
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="m-0 h-full">
-      <h1 className="m-10 mb-5 text-2xl font-bold">
-        PROJECT {">"} {project.name.toLocaleUpperCase()}
+      <h1 className="m-10 mb-2 text-2xl font-bold">
+        PROJECT {">"} {state.name.toLocaleUpperCase()}
       </h1>
+      <p className="m-10 mt-0 mb-5">Last updated: {lastUpdated}</p>
       <DragDropContext onDragEnd={onDragEnd}>
         <StrictModeDroppable
           droppableId="all-columns"
