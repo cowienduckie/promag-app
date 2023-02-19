@@ -6,15 +6,16 @@ import { useLoaderData } from "react-router-dom";
 import { LoaderData } from "../interface";
 import { useDragDrop } from "../data";
 import { useEffect, useState } from "react";
+import { getProjectById } from "@/features/project/apis";
 
 export const ProjectDetailPage = () => {
-  const { promise, project } = useLoaderData() as LoaderData;
+  const { projectId, project } = useLoaderData() as LoaderData;
   const { onDragEnd, state, setState } = useDragDrop({ project });
   const [lastUpdated, setLastUpdated] = useState<string>("");
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const response = await promise;
+      const response = await getProjectById(projectId ?? "");
       setState(response);
       setLastUpdated(new Date().toLocaleTimeString());
     }, 3000);

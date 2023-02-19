@@ -2,13 +2,26 @@ import { ButtonModal } from "@/components/button-modal";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { Button, Form, Input } from "antd";
 import { IColumn } from "../../interfaces";
+import { WorkItemDto } from "@/features/project/apis/types";
+import { createTask } from "@/features/project/apis";
+import TextArea from "antd/es/input/TextArea";
 
 export const AddTaskModal = ({ column }: { column: IColumn }) => {
   const { isOpen, open, close } = useDisclosure(false);
 
-  const onFinish = (values: unknown) => {
-    console.log("Success:", values);
-    //close();
+  const onFinish = (values: any) => {
+    const newTask: WorkItemDto = {
+      id: "",
+      name: values.name,
+      description: values.description,
+      isCompleted: false,
+      position: column.taskIds.length + 1,
+      workColumnId: column.id
+    };
+
+    createTask(newTask).finally(() => {
+      close();
+    });
   };
 
   const onFinishFailed = (errorInfo: unknown) => {
@@ -35,20 +48,17 @@ export const AddTaskModal = ({ column }: { column: IColumn }) => {
       >
         <Form.Item
           label="Name"
-          name="content"
+          name="name"
           rules={[{ required: true, message: "Please input task name!" }]}
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          label="Column"
-          name="column"
-          initialValue={column.id}
-          rules={[{ required: true }]}
-          hidden
+          label="Description"
+          name="description"
+          rules={[{ required: false }]}
         >
-          <Input disabled />
+          <TextArea rows={3} />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button className="mr-2" type="primary" htmlType="submit">

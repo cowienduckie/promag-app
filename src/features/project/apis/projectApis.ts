@@ -3,6 +3,7 @@ import {
   PagedList,
   ProjectDto,
   ProjectMinimalDto,
+  WorkItemDto,
   Wrapper
 } from "@/features/project/apis/types";
 import { IColumnSet, IProject, ITaskSet } from "@/features/project/interfaces";
@@ -67,4 +68,8 @@ export const getProjects = (): Promise<IProject[]> => {
 
 export const updateProject = (projectId: string, project: IProject) => {
   return axios.put(`/projects/${projectId}`, project);
+};
+
+export const createTask = (item: WorkItemDto) => {
+  return axios.post(`/items`, item);
 };

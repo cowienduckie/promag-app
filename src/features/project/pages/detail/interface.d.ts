@@ -1,6 +1,6 @@
 import { IProject } from "../../interfaces";
 
 export interface LoaderData {
-  promise: Promise<IProject>;
+  projectId: string | undefined;
   project: IProject;
 }
