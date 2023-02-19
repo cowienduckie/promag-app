@@ -13,8 +13,6 @@ export const getProjectById = (projectId: string): Promise<IProject> => {
     (response) => {
       const project = response.data.data;
 
-      console.log(project);
-
       if (!!project) {
         return {
           id: project.id,
@@ -25,7 +23,8 @@ export const getProjectById = (projectId: string): Promise<IProject> => {
               acc[task.id] = {
                 id: task.id,
                 content: task.name,
-                isCompleted: task.isCompleted
+                isCompleted: task.isCompleted,
+                description: task.description
               };
             });
 
@@ -72,4 +71,8 @@ export const updateProject = (projectId: string, project: IProject) => {
 
 export const createTask = (item: WorkItemDto) => {
   return axios.post(`/items`, item);
+};
+
+export const deleteTask = (id: string) => {
+  return axios.delete(`/items/${id}`);
 };
