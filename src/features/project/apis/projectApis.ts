@@ -3,6 +3,7 @@ import {
   PagedList,
   ProjectDto,
   ProjectMinimalDto,
+  WorkColumnDto,
   WorkItemDto,
   Wrapper
 } from "@/features/project/apis/types";
@@ -66,11 +67,40 @@ export const getProjects = (): Promise<IProject[]> => {
 };
 
 export const updateProject = (projectId: string, project: IProject) => {
-  return axios.put(`/projects/${projectId}`, project);
+  const updatedProject: ProjectDto = {
+    id: projectId,
+    name: project.name,
+    description: project.description,
+    workColumns: Object.values(project.columns).map(
+      (column) =>
+        ({
+          id: column.id,
+          name: column.title,
+          position: project.columnOrder.indexOf(column.id),
+          workItems: column.taskIds.map(
+            (taskId) =>
+              ({
+                id: taskId,
+                name: project.tasks[taskId].content,
+                description: project.tasks[taskId].description,
+                isCompleted: project.tasks[taskId].isCompleted,
+                position: column.taskIds.indexOf(taskId),
+                workColumnId: column.id
+              } as WorkItemDto)
+          )
+        } as WorkColumnDto)
+    )
+  };
+
+  return axios.put(`/projects`, updatedProject);
 };
 
 export const createTask = (item: WorkItemDto) => {
   return axios.post(`/items`, item);
+};
+
+export const updateTask = (item: WorkItemDto) => {
+  return axios.put(`/items`, item);
 };
 
 export const deleteTask = (id: string) => {

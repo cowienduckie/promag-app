@@ -22,6 +22,7 @@ export interface IColumnSet {
 export interface IProject {
   id: string;
   name: string;
+  description: string;
   tasks: ITaskSet;
   columns: IColumnSet;
   columnOrder: string[];

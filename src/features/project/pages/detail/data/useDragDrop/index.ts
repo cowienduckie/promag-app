@@ -96,8 +96,8 @@ export const useDragDrop = (props: Props): ReturnType => {
       }
     };
 
-    setState(newState);
     updateProject(newState.id, newState);
+    setState(newState);
   };
 
   return { onDragEnd, onCompleteTask, state, setState };

@@ -13,7 +13,7 @@ export const AddTaskModal = ({ column }: { column: IColumn }) => {
     const newTask: WorkItemDto = {
       id: "",
       name: values.name,
-      description: values.description,
+      description: values.description ?? "",
       isCompleted: false,
       position: column.taskIds.length + 1,
       workColumnId: column.id
