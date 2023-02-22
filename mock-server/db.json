@@ -23,6 +23,12 @@
           "id": "task-4",
           "name": "Planning",
           "isCompleted": false
+        },
+        "task-5": {
+          "id": "task-5",
+          "name": "New Task ",
+          "description": "This is a description!",
+          "column": "column-2"
         }
       },
       "columns": {
@@ -35,16 +41,16 @@
           "id": "column-2",
           "name": "In progress",
           "taskIds": [
-            "task-2",
-            "task-3",
-            "task-4",
-            "task-1"
+            "task-5"
           ]
         },
         "column-3": {
           "id": "column-3",
           "name": "Done",
-          "taskIds": []
+          "taskIds": [
+            "task-2",
+            "task-3"
+          ]
         }
       },
       "columnOrder": [
@@ -64,7 +70,7 @@
         },
         "task-2": {
           "id": "task-2",
-          "name": "Assign task",
+          "name": "ABCDEF",
           "isCompleted": false
         },
         "task-3": {
@@ -78,29 +84,33 @@
           "name": "New Task",
           "description": "",
           "column": "column-3"
+        },
+        "task-5": {
+          "id": "task-5",
+          "name": "Description dd",
+          "description": "",
+          "column": "column-3"
         }
       },
       "columns": {
         "column-1": {
           "id": "column-1",
           "name": "To do",
-          "taskIds": [
-            "task-2"
-          ]
+          "taskIds": []
         },
         "column-2": {
           "id": "column-2",
           "name": "In progress",
           "taskIds": [
-            "task-3",
-            "task-4",
-            "task-1"
+            "task-5"
           ]
         },
         "column-3": {
           "id": "column-3",
           "name": "Done",
-          "taskIds": []
+          "taskIds": [
+            "task-1"
+          ]
         }
       },
       "columnOrder": [

@@ -1,42 +1,183 @@
-import { ITask } from "@/features/project/types";
+import { IProject, ITask } from "@/features/project/types";
 import { Container } from "@/features/project/components/container";
 import { Draggable } from "react-beautiful-dnd";
-import { memo } from "react";
-import { Checkbox } from "antd";
+import { memo, useContext, useState } from "react";
+import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { useDisclosure } from "@/hooks/useDisclosure";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { ProjectContext } from "@/features/project/contexts/projectContext";
+import TextArea from "antd/es/input/TextArea";
 
 type TaskProps = {
   task: ITask;
   index: number;
 };
 
+enum Action {
+  ViewTask = "VIEW_TASK",
+  EditTask = "EDIT_TASK"
+}
+
 const Task = (props: TaskProps) => {
   const { task, index, ...otherProps } = props;
+  const { isOpen, open, close } = useDisclosure(false);
+  const projectContext = useContext(ProjectContext);
+  const [action, setAction] = useState<Action>(Action.ViewTask);
+
+  const handleDeleteTask = () => {
+    const columnId =
+      projectContext.project.columnOrder.find((columnId) =>
+        projectContext.project.columns[columnId].taskIds.includes(task.id)
+      ) ?? "";
+
+    const updatedProject = {
+      ...projectContext.project,
+      tasks: {
+        ...projectContext.project.tasks
+      },
+      columns: {
+        ...projectContext.project.columns,
+        [columnId]: {
+          ...projectContext.project.columns[columnId],
+          taskIds: projectContext.project.columns[columnId].taskIds.filter(
+            (taskId) => taskId !== task.id
+          )
+        }
+      }
+    };
+    projectContext.updateProject(updatedProject);
+    close();
+  };
+
+  const handleEditTask = (values: { name: string; description?: string }) => {
+    const updatedProject = {
+      ...projectContext.project,
+      tasks: {
+        ...projectContext.project.tasks,
+        [task.id]: {
+          ...task,
+          name: values.name,
+          description: values.description ?? ""
+        }
+      }
+    } as IProject;
+    projectContext.updateProject(updatedProject);
+  };
 
   return (
-    <Draggable
-      draggableId={task.id}
-      index={index}
-      key={task.id}
-      {...otherProps}
-    >
-      {(provided, snapshot) => (
-        <Container
-          className={`my-2 rounded p-4 ${
-            snapshot.isDragging ? "bg-green-100" : "bg-white"
-          }`}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          innerRef={provided.innerRef}
-        >
-          <p>
-            <strong>{task.name}</strong>
-          </p>
-          <Checkbox className="mt-5" checked={task.isCompleted}>
-            Is Completed?
-          </Checkbox>
-        </Container>
-      )}
-    </Draggable>
+    <>
+      <Draggable
+        draggableId={task.id}
+        index={index}
+        key={task.id}
+        {...otherProps}
+      >
+        {(provided, snapshot) => (
+          <Container
+            className={`my-2 rounded p-4 ${
+              snapshot.isDragging ? "bg-green-100" : "bg-white"
+            }`}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            innerRef={provided.innerRef}
+          >
+            <p onClick={open}>
+              <strong>{task.name}</strong>
+            </p>
+            <Checkbox className="mt-5" checked={task.isCompleted}>
+              Is Completed?
+            </Checkbox>
+          </Container>
+        )}
+      </Draggable>
+
+      <Modal
+        title={task.name.toUpperCase()}
+        className="p-2"
+        open={isOpen}
+        onOk={close}
+        onCancel={() => {
+          setAction(Action.ViewTask);
+          close();
+        }}
+        footer={false}
+      >
+        {action === Action.ViewTask ? (
+          <>
+            <p className="mt-5 mb-2">
+              <strong>ID: </strong> {task.id}
+            </p>
+            <p className="my-2">
+              <strong>Description:</strong> {task.description}
+            </p>
+            <div className="flex flex-row justify-center">
+              <Button
+                className="mt-5"
+                type="primary"
+                danger
+                onClick={handleDeleteTask}
+                icon={<DeleteOutlined className="align-text-top" />}
+              >
+                Delete
+              </Button>
+              <Button
+                className="mt-5 ml-5 bg-green-500"
+                type="primary"
+                onClick={() => setAction(Action.EditTask)}
+                icon={<EditOutlined className="align-text-top" />}
+              >
+                Edit
+              </Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <Form
+              className="my-5"
+              labelCol={{ span: 6 }}
+              wrapperCol={{ span: 16 }}
+              onFinish={handleEditTask}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Name"
+                name="name"
+                rules={[{ required: true, message: "Please input task name!" }]}
+              >
+                <Input defaultValue={task.name} />
+              </Form.Item>
+
+              <Form.Item label="Description" name="description">
+                <TextArea rows={3} defaultValue={task.description} />
+              </Form.Item>
+
+              <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button
+                  className="mt-5"
+                  type="primary"
+                  danger
+                  onClick={() => setAction(Action.ViewTask)}
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  className="mt-5 ml-5 bg-green-500"
+                  type="primary"
+                  onClick={() => {
+                    setAction(Action.ViewTask);
+                    close();
+                  }}
+                  htmlType="submit"
+                >
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
+          </>
+        )}
+      </Modal>
+    </>
   );
 };
 
