@@ -29,7 +29,7 @@ const Task = (props: TaskProps) => {
           innerRef={provided.innerRef}
         >
           <p>
-            <strong>{task.content}</strong>
+            <strong>{task.name}</strong>
           </p>
           <Checkbox className="mt-5" checked={task.isCompleted}>
             Is Completed?

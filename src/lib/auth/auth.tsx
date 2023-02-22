@@ -1,8 +1,8 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import _ from "lodash";
 
 import { AuthContextProps, AuthReducerState, UserInfo } from "./interfaces";
-import { AuthAction } from "./enums";
+import { AuthAction, Role } from "./enums";
 
 import { USER_INFO_KEY } from "@/config";
 import storage from "@/utils/storage";
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     userInfo: {
       id: "",
       userName: "",
-      role: -1,
+      role: Role.User,
       token: ""
     }
   };

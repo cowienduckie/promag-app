@@ -1,14 +1,40 @@
 import { ButtonModal } from "@/components/button-modal";
 import { useDisclosure } from "@/hooks/useDisclosure";
 import { Button, Form, Input } from "antd";
-import { IColumn } from "../../types";
+import { IColumn, IProject } from "../../types";
+import { useContext } from "react";
+import { ProjectContext } from "@/features/project/contexts/projectContext";
+import TextArea from "antd/es/input/TextArea";
 
 export const AddTaskModal = ({ column }: { column: IColumn }) => {
   const { isOpen, open, close } = useDisclosure(false);
+  const projectContext = useContext(ProjectContext);
 
-  const onFinish = (values: unknown) => {
-    console.log("Success:", values);
-    //close();
+  const onFinish = (values: { name: string; description?: string }) => {
+    const newId: string =
+      "task-" + (Object.keys(projectContext.project.tasks).length + 1);
+
+    projectContext.project.columns[column.id].taskIds.push(newId);
+
+    const updatedProject = {
+      ...projectContext.project,
+      tasks: {
+        ...projectContext.project.tasks,
+        [newId]: {
+          id: newId,
+          name: values.name,
+          description: values.description ?? "",
+          column: column.id
+        }
+      },
+      columns: {
+        ...projectContext.project.columns
+      }
+    } as IProject;
+
+    projectContext.updateProject(updatedProject);
+
+    close();
   };
 
   const onFinishFailed = (errorInfo: unknown) => {
@@ -35,21 +61,16 @@ export const AddTaskModal = ({ column }: { column: IColumn }) => {
       >
         <Form.Item
           label="Name"
-          name="content"
+          name="name"
           rules={[{ required: true, message: "Please input task name!" }]}
         >
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label="Column"
-          name="column"
-          initialValue={column.id}
-          rules={[{ required: true }]}
-          hidden
-        >
-          <Input disabled />
+        <Form.Item label="Description" name="description">
+          <TextArea rows={3} />
         </Form.Item>
+
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button className="mr-2" type="primary" htmlType="submit">
             Submit

@@ -9,6 +9,6 @@ export const getProjects = (): Promise<IProject[]> => {
   return axios(`/projects`);
 };
 
-export const updateProject = (projectId: string, project: IProject) => {
+export const updateProjectApi = (projectId: string, project: IProject) => {
   return axios.put(`/projects/${projectId}`, project);
 };

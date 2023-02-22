@@ -33,7 +33,7 @@ const Column = (props: ColumnProps) => {
           innerRef={provided.innerRef}
         >
           <h1 className="mb-3 text-2xl font-bold" {...provided.dragHandleProps}>
-            {column.title}
+            {column.name}
           </h1>
           <StrictModeDroppable droppableId={column.id} type="task">
             {(provided, snapshot) => (

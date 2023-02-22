@@ -1,16 +1,12 @@
-import { updateProject } from "@/features/project/apis";
 import { IColumn, IProject } from "@/features/project/types";
-import { useState } from "react";
+import { useContext } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import {
   moveColumn,
   moveTaskSameColumn,
   moveTaskToAnotherColumn
 } from "./functions";
-
-type Props = {
-  project: IProject;
-};
+import { ProjectContext } from "@/features/project/contexts/projectContext";
 
 type ReturnType = {
   onDragEnd: (result: DropResult) => void;
@@ -18,9 +14,8 @@ type ReturnType = {
   state: IProject;
 };
 
-export const useDragDrop = (props: Props): ReturnType => {
-  const { project } = props;
-  const [state, setState] = useState(project);
+export const useDragDrop = (): ReturnType => {
+  const projectContext = useContext(ProjectContext);
 
   const onDragEnd = (result: DropResult): void => {
     const { draggableId, source, destination, type } = result;
@@ -39,14 +34,19 @@ export const useDragDrop = (props: Props): ReturnType => {
     let newState: IProject;
 
     if (type === "column") {
-      newState = moveColumn(state, draggableId, source, destination);
+      newState = moveColumn(
+        projectContext.project,
+        draggableId,
+        source,
+        destination
+      );
     } else {
-      const start = state.columns[source.droppableId];
-      const finish = state.columns[destination.droppableId];
+      const start = projectContext.project.columns[source.droppableId];
+      const finish = projectContext.project.columns[destination.droppableId];
 
       if (start === finish) {
         newState = moveTaskSameColumn(
-          state,
+          projectContext.project,
           draggableId,
           source,
           destination,
@@ -54,7 +54,7 @@ export const useDragDrop = (props: Props): ReturnType => {
         );
       } else {
         newState = moveTaskToAnotherColumn(
-          state,
+          projectContext.project,
           draggableId,
           source,
           destination,
@@ -64,8 +64,8 @@ export const useDragDrop = (props: Props): ReturnType => {
       }
     }
 
-    setState(newState);
-    updateProject(newState.id, newState);
+    projectContext.setProject(newState);
+    projectContext.updateProject(newState);
   };
 
   const onCompleteTask = (taskId: string, currentColumn: IColumn): void => {
@@ -78,26 +78,28 @@ export const useDragDrop = (props: Props): ReturnType => {
       taskIds: startTaskIds
     };
 
-    const finishTaskIds = Array.from(state.columns["column-3"].taskIds);
+    const finishTaskIds = Array.from(
+      projectContext.project.columns["column-3"].taskIds
+    );
     finishTaskIds.splice(finishTaskIds.length, 0, taskId);
 
     const newFinish = {
-      ...state.columns["column-3"],
+      ...projectContext.project.columns["column-3"],
       taskIds: finishTaskIds
     };
 
     const newState = {
-      ...state,
+      ...projectContext.project,
       columns: {
-        ...state.columns,
+        ...projectContext.project.columns,
         [currentColumn.id]: newStart,
         ["column-3"]: newFinish
       }
     };
 
-    setState(newState);
-    updateProject(newState.id, newState);
+    projectContext.setProject(newState);
+    projectContext.updateProject(newState);
   };
 
-  return { onDragEnd, onCompleteTask, state };
+  return { onDragEnd, onCompleteTask, state: projectContext.project };
 };

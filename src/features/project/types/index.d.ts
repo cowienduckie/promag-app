@@ -1,6 +1,7 @@
 export interface ITask {
   id: string;
-  content: string;
+  name: string;
+  description: string;
   isCompleted: boolean;
 }
 
@@ -10,7 +11,7 @@ export interface ITaskSet {
 
 export interface IColumn {
   id: string;
-  title: string;
+  name: string;
   taskIds: string[];
 }
 
@@ -21,6 +22,7 @@ export interface IColumnSet {
 export interface IProject {
   id: string;
   name: string;
+  description: string;
   tasks: ITaskSet;
   columns: IColumnSet;
   columnOrder: string[];
