@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const useDisclosure = (initial = false) => {
+export const useLoading = (initial = false) => {
   const [isLoading, setIsLoading] = React.useState(initial);
 
   const startLoading = React.useCallback(() => setIsLoading(true), []);

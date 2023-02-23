@@ -1,4 +1,4 @@
-import { IColumn, IProject } from "@/features/project/types";
+import { IProject } from "@/features/project/types";
 import { useContext } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import {
@@ -10,7 +10,6 @@ import { ProjectContext } from "@/features/project/contexts/projectContext";
 
 type ReturnType = {
   onDragEnd: (result: DropResult) => void;
-  onCompleteTask: (taskId: string, currentColumn: IColumn) => void;
   state: IProject;
 };
 
@@ -68,38 +67,5 @@ export const useDragDrop = (): ReturnType => {
     projectContext.updateProject(newState);
   };
 
-  const onCompleteTask = (taskId: string, currentColumn: IColumn): void => {
-    const startTaskIds = Array.from(currentColumn.taskIds);
-    const index = startTaskIds.indexOf(taskId);
-    startTaskIds.splice(index, 1);
-
-    const newStart = {
-      ...currentColumn,
-      taskIds: startTaskIds
-    };
-
-    const finishTaskIds = Array.from(
-      projectContext.project.columns["column-3"].taskIds
-    );
-    finishTaskIds.splice(finishTaskIds.length, 0, taskId);
-
-    const newFinish = {
-      ...projectContext.project.columns["column-3"],
-      taskIds: finishTaskIds
-    };
-
-    const newState = {
-      ...projectContext.project,
-      columns: {
-        ...projectContext.project.columns,
-        [currentColumn.id]: newStart,
-        ["column-3"]: newFinish
-      }
-    };
-
-    projectContext.setProject(newState);
-    projectContext.updateProject(newState);
-  };
-
-  return { onDragEnd, onCompleteTask, state: projectContext.project };
+  return { onDragEnd, state: projectContext.project };
 };

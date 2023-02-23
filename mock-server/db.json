@@ -28,7 +28,8 @@
           "id": "task-5",
           "name": "New Task ",
           "description": "This is a description!",
-          "column": "column-2"
+          "column": "column-2",
+          "isCompleted": false
         }
       },
       "columns": {
@@ -40,16 +41,15 @@
         "column-2": {
           "id": "column-2",
           "name": "In progress",
-          "taskIds": [
-            "task-5"
-          ]
+          "taskIds": []
         },
         "column-3": {
           "id": "column-3",
           "name": "Done",
           "taskIds": [
-            "task-2",
-            "task-3"
+            "task-3",
+            "task-5",
+            "task-2"
           ]
         }
       },
@@ -57,6 +57,49 @@
         "column-1",
         "column-2",
         "column-3"
+      ],
+      "customRules": [
+        {
+          "id": "rule-1",
+          "triggerType": "MarkAsComplete",
+          "triggerValue": "",
+          "actionType": "MoveToColumn",
+          "actionValue": {
+            "id": "column-3",
+            "name": "Done",
+            "taskIds": [
+              "task-3",
+              "task-5",
+              "task-2"
+            ]
+          }
+        },
+        {
+          "id": "rule-2",
+          "triggerType": "MoveToColumn",
+          "triggerValue": {
+            "id": "column-3",
+            "name": "Done",
+            "taskIds": [
+              "task-3",
+              "task-5",
+              "task-2"
+            ]
+          },
+          "actionType": "MarkAsComplete",
+          "actionValue": ""
+        },
+        {
+          "id": "rule-3",
+          "triggerType": "MarkAsIncomplete",
+          "triggerValue": "",
+          "actionType": "MoveToColumn",
+          "actionValue": {
+            "id": "column-1",
+            "name": "To do",
+            "taskIds": []
+          }
+        }
       ]
     },
     {
@@ -117,7 +160,8 @@
         "column-1",
         "column-2",
         "column-3"
-      ]
+      ],
+      "customRules": []
     }
   ]
 }

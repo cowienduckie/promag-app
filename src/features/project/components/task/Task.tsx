@@ -64,6 +64,20 @@ const Task = (props: TaskProps) => {
     projectContext.updateProject(updatedProject);
   };
 
+  const handleMarkAsCompleted = () => {
+    const updatedProject = {
+      ...projectContext.project,
+      tasks: {
+        ...projectContext.project.tasks,
+        [task.id]: {
+          ...task,
+          isCompleted: !task.isCompleted
+        }
+      }
+    } as IProject;
+    projectContext.updateProject(updatedProject);
+  };
+
   return (
     <>
       <Draggable
@@ -75,7 +89,11 @@ const Task = (props: TaskProps) => {
         {(provided, snapshot) => (
           <Container
             className={`my-2 rounded p-4 ${
-              snapshot.isDragging ? "bg-green-100" : "bg-white"
+              snapshot.isDragging
+                ? "bg-green-100"
+                : task.isCompleted
+                ? "bg-gray-300"
+                : "bg-white"
             }`}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
@@ -84,7 +102,11 @@ const Task = (props: TaskProps) => {
             <p onClick={open}>
               <strong>{task.name}</strong>
             </p>
-            <Checkbox className="mt-5" checked={task.isCompleted}>
+            <Checkbox
+              className="mt-5"
+              onClick={handleMarkAsCompleted}
+              checked={task.isCompleted}
+            >
               Is Completed?
             </Checkbox>
           </Container>
