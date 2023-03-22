@@ -32,7 +32,7 @@ export const AddTaskModal = ({ column }: { column: IColumn }) => {
       }
     } as IProject;
 
-    projectContext.updateProject(updatedProject);
+    projectContext.updateProject(updatedProject, null);
 
     close();
   };

@@ -1,4 +1,4 @@
-import { IProject, ITask } from "@/features/project/types";
+import { IProject, ITask, TriggerType } from "@/features/project/types";
 import { Container } from "@/features/project/components/container";
 import { Draggable } from "react-beautiful-dnd";
 import { memo, useContext, useState } from "react";
@@ -75,7 +75,12 @@ const Task = (props: TaskProps) => {
         }
       }
     } as IProject;
-    projectContext.updateProject(updatedProject);
+    projectContext.updateProject(updatedProject, {
+      taskId: task.id,
+      triggerType: !task.isCompleted
+        ? TriggerType.MarkAsComplete
+        : TriggerType.MarkAsIncomplete
+    });
   };
 
   return (

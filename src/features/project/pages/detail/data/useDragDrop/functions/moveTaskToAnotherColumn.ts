@@ -1,4 +1,4 @@
-import { IProject, IColumn } from "@/features/project/types";
+import { IColumn, IProject } from "@/features/project/types";
 import { DraggableLocation } from "react-beautiful-dnd";
 
 export const moveTaskToAnotherColumn = (
@@ -31,6 +31,13 @@ export const moveTaskToAnotherColumn = (
       ...currentState.columns,
       [start.id]: newStart,
       [finish.id]: newFinish
+    },
+    tasks: {
+      ...currentState.tasks,
+      [draggableId]: {
+        ...currentState.tasks[draggableId],
+        column: finish.id
+      }
     }
   };
 };

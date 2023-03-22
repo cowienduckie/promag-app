@@ -6,29 +6,37 @@
       "tasks": {
         "task-1": {
           "id": "task-1",
-          "name": "Create a new task",
+          "name": "Create repository",
+          "description": "",
+          "column": "column-1",
           "isCompleted": false
         },
         "task-2": {
           "id": "task-2",
-          "name": "Assign task",
+          "name": "Planning",
+          "description": "",
+          "column": "column-1",
           "isCompleted": false
         },
         "task-3": {
           "id": "task-3",
-          "name": "Review code",
+          "name": "Setup project",
+          "description": "",
+          "column": "column-2",
           "isCompleted": false
         },
         "task-4": {
           "id": "task-4",
-          "name": "Planning",
-          "isCompleted": false
+          "name": "Write report",
+          "description": "",
+          "column": "column-3",
+          "isCompleted": true
         },
         "task-5": {
           "id": "task-5",
-          "name": "New Task ",
-          "description": "This is a description!",
-          "column": "column-2",
+          "name": "Write document",
+          "description": "",
+          "column": "column-1",
           "isCompleted": false
         }
       },
@@ -36,20 +44,24 @@
         "column-1": {
           "id": "column-1",
           "name": "To do",
-          "taskIds": []
+          "taskIds": [
+            "task-2",
+            "task-5",
+            "task-1"
+          ]
         },
         "column-2": {
           "id": "column-2",
           "name": "In progress",
-          "taskIds": []
+          "taskIds": [
+            "task-3"
+          ]
         },
         "column-3": {
           "id": "column-3",
           "name": "Done",
           "taskIds": [
-            "task-3",
-            "task-5",
-            "task-2"
+            "task-4"
           ]
         }
       },
@@ -61,29 +73,13 @@
       "customRules": [
         {
           "id": "rule-1",
-          "triggerType": "MarkAsComplete",
-          "triggerValue": "",
-          "actionType": "MoveToColumn",
-          "actionValue": {
-            "id": "column-3",
-            "name": "Done",
-            "taskIds": [
-              "task-3",
-              "task-5",
-              "task-2"
-            ]
-          }
-        },
-        {
-          "id": "rule-2",
           "triggerType": "MoveToColumn",
           "triggerValue": {
             "id": "column-3",
             "name": "Done",
             "taskIds": [
-              "task-3",
-              "task-5",
-              "task-2"
+              "task-4",
+              "task-1"
             ]
           },
           "actionType": "MarkAsComplete",
@@ -95,8 +91,8 @@
           "triggerValue": "",
           "actionType": "MoveToColumn",
           "actionValue": {
-            "id": "column-1",
-            "name": "To do",
+            "id": "column-2",
+            "name": "In progress",
             "taskIds": []
           }
         }
@@ -109,7 +105,8 @@
         "task-1": {
           "id": "task-1",
           "name": "Create a new task",
-          "isCompleted": false
+          "isCompleted": false,
+          "column": "column-1"
         },
         "task-2": {
           "id": "task-2",
@@ -132,14 +129,17 @@
           "id": "task-5",
           "name": "Description dd",
           "description": "",
-          "column": "column-3"
+          "column": "column-2",
+          "isCompleted": false
         }
       },
       "columns": {
         "column-1": {
           "id": "column-1",
           "name": "To do",
-          "taskIds": []
+          "taskIds": [
+            "task-1"
+          ]
         },
         "column-2": {
           "id": "column-2",
@@ -151,9 +151,7 @@
         "column-3": {
           "id": "column-3",
           "name": "Done",
-          "taskIds": [
-            "task-1"
-          ]
+          "taskIds": []
         }
       },
       "columnOrder": [

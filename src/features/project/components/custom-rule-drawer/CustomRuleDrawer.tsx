@@ -51,7 +51,7 @@ export const CustomRuleDrawer = ({
         } as IRule
       ]
     } as IProject;
-    projectContext.updateProject(updatedProject);
+    projectContext.updateProject(updatedProject, null);
     setAction(Action.ViewRules);
   };
 
@@ -62,7 +62,7 @@ export const CustomRuleDrawer = ({
         (rule) => rule.id !== ruleId
       )
     } as IProject;
-    projectContext.updateProject(updatedProject);
+    projectContext.updateProject(updatedProject, null);
   };
 
   return (
@@ -104,8 +104,8 @@ export const CustomRuleDrawer = ({
     >
       {action === Action.ViewRules ? (
         <>
-          {project.customRules &&
-            project.customRules.map((rule) => (
+          {projectContext.project.customRules &&
+            projectContext.project.customRules.map((rule) => (
               <Card className="my-2" key={rule.id} title={rule.id}>
                 <p className="my-2">Trigger Type: {rule.triggerType}</p>
                 {typeof rule.triggerValue !== "string" && (
@@ -153,12 +153,14 @@ export const CustomRuleDrawer = ({
           <Form.Item label="Trigger Value" name="triggerValue" initialValue="">
             <Select>
               <Select.Option value="">[None]</Select.Option>
-              {project.columnOrder.map((columnId) => (
+              {projectContext.project.columnOrder.map((columnId) => (
                 <Select.Option
                   key={columnId}
-                  value={JSON.stringify(project.columns[columnId])}
+                  value={JSON.stringify(
+                    projectContext.project.columns[columnId]
+                  )}
                 >
-                  {project.columns[columnId].name}
+                  {projectContext.project.columns[columnId].name}
                 </Select.Option>
               ))}
             </Select>
@@ -181,12 +183,14 @@ export const CustomRuleDrawer = ({
           <Form.Item label="Action Value" name="actionValue" initialValue="">
             <Select>
               <Select.Option value="">[None]</Select.Option>
-              {project.columnOrder.map((columnId) => (
+              {projectContext.project.columnOrder.map((columnId) => (
                 <Select.Option
                   key={columnId}
-                  value={JSON.stringify(project.columns[columnId])}
+                  value={JSON.stringify(
+                    projectContext.project.columns[columnId]
+                  )}
                 >
-                  {project.columns[columnId].name}
+                  {projectContext.project.columns[columnId].name}
                 </Select.Option>
               ))}
             </Select>

@@ -3,6 +3,7 @@ export interface ITask {
   name: string;
   description: string;
   isCompleted: boolean;
+  column: string;
 }
 
 export interface ITaskSet {

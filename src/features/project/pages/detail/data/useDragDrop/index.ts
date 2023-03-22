@@ -1,4 +1,4 @@
-import { IProject } from "@/features/project/types";
+import { IProject, TriggerType } from "@/features/project/types";
 import { useContext } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import {
@@ -39,6 +39,8 @@ export const useDragDrop = (): ReturnType => {
         source,
         destination
       );
+
+      projectContext.updateProject(newState);
     } else {
       const start = projectContext.project.columns[source.droppableId];
       const finish = projectContext.project.columns[destination.droppableId];
@@ -51,6 +53,7 @@ export const useDragDrop = (): ReturnType => {
           destination,
           start
         );
+        projectContext.updateProject(newState);
       } else {
         newState = moveTaskToAnotherColumn(
           projectContext.project,
@@ -60,11 +63,14 @@ export const useDragDrop = (): ReturnType => {
           start,
           finish
         );
+
+        projectContext.updateProject(newState, {
+          taskId: draggableId,
+          triggerType: TriggerType.MoveToColumn,
+          triggerValue: newState.columns[destination.droppableId]
+        });
       }
     }
-
-    projectContext.setProject(newState);
-    projectContext.updateProject(newState);
   };
 
   return { onDragEnd, state: projectContext.project };
